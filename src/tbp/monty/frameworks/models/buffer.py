@@ -469,8 +469,7 @@ class FeatureAtLocationBuffer(BaseBuffer):
                 "get_first_sensory_input_channel assumes we have at least one"
                 f" sensor channel but channels are {all_channels}."
             )
-        else:
-            return None
+        return None
 
     def set_individual_ts(self, object_id, pose):
         """Update self.stats with the individual LMs terminal state."""

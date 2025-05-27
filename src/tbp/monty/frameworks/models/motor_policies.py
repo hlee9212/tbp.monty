@@ -1022,9 +1022,8 @@ class NaiveScanPolicy(InformedPolicy):
             # python loop statements using iterators.
             # See https://docs.python.org/3/library/exceptions.html#StopIteration
             raise StopIteration()
-        else:
-            self.check_cycle_action()
-            action = self._naive_scan_actions[self.current_action_id]
+        self.check_cycle_action()
+        action = self._naive_scan_actions[self.current_action_id]
         self.step_on_action += 1
         return action
 
