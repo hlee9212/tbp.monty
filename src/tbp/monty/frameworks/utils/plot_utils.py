@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 from typing import TYPE_CHECKING, Any, Optional, Sequence, cast
 
 import matplotlib.pyplot as plt
@@ -1151,7 +1152,7 @@ def show_initial_hypotheses(
     plt.title(f"Possible Rotations along {possible_ax[axis]} axis")
     if save_fig:
         if not os.path.exists(save_path):
-            os.makedirs(save_path)
+            Path(save_path).mkdir(parents=True)
         print("figure saved at " + save_path)
         plt.savefig(
             save_path + f"initialH_{episode}_{obj}_{possible_ax[axis]}.png",
@@ -1331,7 +1332,7 @@ def plot_evidence_at_step(
 
     if save_fig:
         if not os.path.exists(save_path):
-            os.makedirs(save_path)
+            Path(save_path).mkdir(parents=True)
         print("figure saved at " + save_path)
         plt.savefig(
             save_path + f"{episode}_{step}.png",
@@ -1830,7 +1831,7 @@ class PolicyPlot:
 
         if save_path is not None:
             if not os.path.exists(save_path):
-                os.makedirs(save_path)
+                Path(save_path).mkdir(parents=True)
             print("figure saved at " + save_path)
             plt.savefig(
                 save_path + f"{self.episode}.png",
@@ -1914,7 +1915,7 @@ def plot_learned_graph(
 
     if save_fig:
         if not os.path.exists(save_path):
-            os.makedirs(save_path)
+            Path(save_path).mkdir(parents=True)
         print("figure saved at " + save_path)
         plt.savefig(
             save_path + f"{episode}.png",
@@ -2085,7 +2086,7 @@ def plot_graph_mismatch(
 
     if save_fig:
         if not os.path.exists(save_path):
-            os.makedirs(save_path)
+            Path(save_path).mkdir(parents=True)
         plt.savefig(
             fname=save_path + plot_name,
             dpi=300,
@@ -2174,7 +2175,7 @@ def plot_hotspots(
 
     if save_fig:
         if not os.path.exists(save_path):
-            os.makedirs(save_path)
+            Path(save_path).mkdir(parents=True)
         print("figure saved at " + save_path)
         plt.savefig(
             save_path,

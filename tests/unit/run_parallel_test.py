@@ -21,6 +21,7 @@ import os
 import shutil
 import tempfile
 import unittest
+from pathlib import Path
 from pprint import pprint
 
 import pandas as pd
@@ -133,14 +134,14 @@ class RunParallelTest(unittest.TestCase):
         self.eval_config_lt["experiment_args"].n_eval_epochs = 2
         self.output_dir_lt = os.path.join(self.output_dir, "lt")
         self.eval_config_lt["logging_config"].output_dir = self.output_dir_lt
-        os.makedirs(self.eval_config_lt["logging_config"].output_dir)
+        Path(self.eval_config_lt["logging_config"].output_dir).mkdir(parents=True)
 
         # This tests that parallel code can handle n_eval_epochs > len(rotations)
         self.eval_config_gt = copy.deepcopy(self.eval_config)
         self.eval_config_gt["experiment_args"].n_eval_epochs = 4
         self.output_dir_gt = os.path.join(self.output_dir, "gt")
         self.eval_config_gt["logging_config"].output_dir = self.output_dir_gt
-        os.makedirs(self.eval_config_gt["logging_config"].output_dir)
+        Path(self.eval_config_gt["logging_config"].output_dir).mkdir(parents=True)
 
     def check_reproducibility_logs(self, serial_repro_dir, parallel_repro_dir):
         s_param_files = [i for i in os.listdir(serial_repro_dir) if "target" in i]

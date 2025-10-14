@@ -14,7 +14,8 @@ import datetime
 import logging
 import os
 import pprint
-from typing import Any, Dict, Literal
+from pathlib import Path
+from typing import TYPE_CHECKING, Any, Dict, Literal
 
 import numpy as np
 import torch
@@ -321,7 +322,7 @@ class MontyExperiment:
         self.run_name = logging_config["run_name"]
 
         if not os.path.exists(self.output_dir):
-            os.makedirs(self.output_dir)
+            Path(self.output_dir).mkdir(parents=True)
 
         # Clear any existing tpb.monty logger handlers
         for handler in logger.handlers:
@@ -589,7 +590,7 @@ class MontyExperiment:
         model_state_dict = self.model.state_dict()
         exp_state_dict = self.state_dict()
         output_dir = output_dir if output_dir is not None else self.output_dir
-        os.makedirs(output_dir, exist_ok=True)
+        Path(output_dir).mkdir(parents=True, exist_ok=True)
         # When performing evaluation with parallel runs on a remote server
         # (assumed if we are using parallel wandb logging), then don't save models;
         # these can fill a huge amount of hard-disk memory before they are cleaned up

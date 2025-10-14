@@ -10,6 +10,7 @@
 
 import cProfile
 import os
+from pathlib import Path
 
 import pandas as pd
 import wandb
@@ -72,7 +73,7 @@ class ProfileExperimentMixin:
 
     def make_profile_dir(self):
         self.profile_dir = os.path.join(self.output_dir, "profile")
-        os.makedirs(self.profile_dir, exist_ok=True)
+        Path(self.profile_dir).mkdir(parents=True, exist_ok=True)
 
     def setup_experiment(self, config):
         filename = "profile-setup_experiment.csv"

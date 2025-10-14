@@ -8,7 +8,6 @@
 # license that can be found in the LICENSE file or at
 # https://opensource.org/licenses/MIT.
 
-import os
 import shutil
 import tempfile
 import unittest
@@ -21,8 +20,8 @@ class TestGetFolders(unittest.TestCase):
     def setUp(self):
         self.temp_dir = tempfile.mkdtemp()
 
-        os.makedirs(Path(self.temp_dir).joinpath("folder1"))
-        os.makedirs(Path(self.temp_dir).joinpath("folder2"))
+        Path(self.temp_dir).joinpath("folder1").mkdir(parents=True)
+        Path(self.temp_dir).joinpath("folder2").mkdir(parents=True)
         open(Path(self.temp_dir).joinpath("file1.txt"), "w").close()
         open(Path(self.temp_dir).joinpath("file2.txt"), "w").close()
 

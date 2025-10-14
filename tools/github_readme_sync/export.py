@@ -11,6 +11,7 @@
 import logging
 import os
 import shutil
+from pathlib import Path
 
 from slugify import slugify
 
@@ -26,7 +27,7 @@ def export(output_dir: str, rdme: ReadMe):
     if os.path.exists(output_dir):
         shutil.rmtree(output_dir)
 
-    os.makedirs(output_dir, exist_ok=True)
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     for i, category in enumerate(categories):
         category_entry = {
@@ -41,7 +42,7 @@ def export(output_dir: str, rdme: ReadMe):
         )
 
         category_folder_path = os.path.join(output_dir, slugify(category["title"]))
-        os.makedirs(category_folder_path, exist_ok=True)
+        Path(category_folder_path).mkdir(parents=True, exist_ok=True)
 
         docs_from_server = rdme.get_category_docs(category)
         for server_doc in docs_from_server:
@@ -75,7 +76,7 @@ def process_doc(*, server_doc, hierarchy_doc, folder_path, indent_level, rdme):
     children = server_doc.get("children", [])
     if children:
         child_folder_path = os.path.join(folder_path, hierarchy_doc["slug"])
-        os.makedirs(child_folder_path, exist_ok=True)
+        Path(child_folder_path).mkdir(parents=True, exist_ok=True)
 
     for child in children:
         child_entry = {

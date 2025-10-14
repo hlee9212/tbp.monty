@@ -655,8 +655,8 @@ This is a test document.""",
             # Create subdirectories
             data_dir = os.path.join(tmp_dir, "data")
             docs_dir = os.path.join(tmp_dir, "docs")
-            os.makedirs(data_dir)
-            os.makedirs(docs_dir)
+            Path(data_dir).mkdir(parents=True)
+            Path(docs_dir).mkdir(parents=True)
 
             # Create a CSV file in the data directory
             csv_path = os.path.join(data_dir, "test.csv")
@@ -687,8 +687,8 @@ This is a test document.""",
         with tempfile.TemporaryDirectory() as tmp_dir:
             docs_dir = os.path.join(tmp_dir, "docs")
             other_dir = os.path.join(tmp_dir, "other")
-            os.makedirs(docs_dir)
-            os.makedirs(other_dir)
+            Path(docs_dir).mkdir(parents=True)
+            Path(other_dir).mkdir(parents=True)
 
             source_md = os.path.join(other_dir, "source.md")
             with open(source_md, "w") as f:

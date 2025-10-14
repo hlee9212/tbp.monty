@@ -59,14 +59,14 @@ Assumptions and notes:
 
 
 def single_train(config):
-    os.makedirs(config["logging_config"]["output_dir"], exist_ok=True)
+    Path(config["logging_config"]["output_dir"]).mkdir(parents=True, exist_ok=True)
     with config["experiment_class"](config) as exp:
         print("---------training---------")
         exp.train()
 
 
 def single_evaluate(config):
-    os.makedirs(config["logging_config"]["output_dir"], exist_ok=True)
+    Path(config["logging_config"]["output_dir"]).mkdir(parents=True, exist_ok=True)
     with config["experiment_class"](config) as exp:
         print("---------evaluating---------")
         exp.evaluate()
@@ -195,7 +195,7 @@ def move_reproducibility_data(base_dir, parallel_dirs):
     if os.path.exists(outdir):
         shutil.rmtree(outdir)
 
-    os.makedirs(outdir)
+    Path(outdir).mkdir(parents=True)
     repro_dirs = [
         os.path.join(pdir, "reproduce_episode_data") for pdir in parallel_dirs
     ]
@@ -295,7 +295,7 @@ def post_parallel_train(configs: List[Mapping], base_dir: str) -> None:
             configs[0]["experiment_class"], MontySupervisedObjectPretrainingExperiment
         ):
             output_dir = os.path.join(output_dir, "pretrained")
-        os.makedirs(output_dir, exist_ok=True)
+        Path(output_dir).mkdir(parents=True, exist_ok=True)
         saved_model_file = os.path.join(output_dir, "model.pt")
         torch.save(exp.model.state_dict(), saved_model_file)
 

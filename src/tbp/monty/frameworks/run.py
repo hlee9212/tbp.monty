@@ -13,6 +13,7 @@ import logging
 import os
 import pprint
 import time
+from pathlib import Path
 
 from tbp.monty.frameworks.config_utils.cmd_parser import create_cmd_parser
 from tbp.monty.frameworks.utils.dataclass_utils import config_to_dict
@@ -109,7 +110,9 @@ def main(all_configs, experiments=None):
             if cmd_args.print_config:
                 continue
 
-        os.makedirs(exp_config["logging_config"]["output_dir"], exist_ok=True)
+        Path(exp_config["logging_config"]["output_dir"]).mkdir(
+            parents=True, exist_ok=True
+        )
         start_time = time.time()
         run(exp_config)
         logger.info(f"Done running {experiment} in {time.time() - start_time} seconds")

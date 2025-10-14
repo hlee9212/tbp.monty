@@ -11,6 +11,7 @@
 import logging
 import os
 import shutil
+from pathlib import Path
 
 import numpy as np
 from tqdm import tqdm
@@ -51,7 +52,7 @@ class LoggerSDR:
         # overwrite existing logs
         if os.path.exists(path):
             shutil.rmtree(path)
-        os.makedirs(path)
+        Path(path).mkdir(parents=True)
 
         self.path = path
         self.episode = 0

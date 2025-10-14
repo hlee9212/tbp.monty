@@ -13,6 +13,7 @@ import copy
 import json
 import logging
 import os
+from pathlib import Path
 from pprint import pformat
 
 from tbp.monty.frameworks.actions.actions import ActionJSONEncoder
@@ -191,7 +192,7 @@ class ReproduceEpisodeHandler(MontyHandler):
         # Set up data directory with reproducibility info for each episode
         if not hasattr(self, "data_dir"):
             self.data_dir = os.path.join(output_dir, "reproduce_episode_data")
-            os.makedirs(self.data_dir, exist_ok=True)
+            Path(self.data_dir).mkdir(parents=True, exist_ok=True)
 
         # TODO: store a pointer to the training model
         # something like if train_epochs == 0:
