@@ -6,12 +6,15 @@ defaults:
   - config/environment_interface/ycb/shuffled_objects@config.eval_env_interface_args.object_names
 
 config:
-  # show_sensor_output: true # added
+  show_sensor_output: true
   model_name_or_path: ${benchmarks.pretrained_dir}/surf_agent_1lm_77obj/pretrained/
   n_eval_epochs: 1
   max_total_steps: 5000
   logging:
-    run_name: base_demo
+    run_name: a_short_demo
+    log_parallel_wandb: false
+    wandb_handlers: []
+    python_log_level: INFO
   eval_env_interface_args:
     object_init_sampler:
       _target_: tbp.monty.frameworks.config_utils.make_env_interface_configs.PredefinedObjectInitializer
