@@ -1,4 +1,6 @@
-# Copied from base_77obj_surf_agent.yaml
+# Configuration for an Object Recognition Experiment
+# Evaluates pretrained Monty to identify bowl and mug from YCB dataset
+
 defaults:
   - base_config_10distinctobj_surf_agent
   - config/environment_interface/clear_eval_env_interface_args@config
@@ -17,13 +19,13 @@ config:
     python_log_level: INFO
   eval_env_interface_args:
     object_init_sampler:
-      _target_: tbp.monty.frameworks.config_utils.make_env_interface_configs.PredefinedObjectInitializer
+      _target_: tbp.monty.frameworks.environments.object_init_samplers.Predefined
       rotations:
       - - 0
         - 0
         - 0
     object_names:
-    - mug
     - bowl
+    - mug
 
   
