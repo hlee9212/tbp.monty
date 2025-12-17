@@ -248,13 +248,13 @@ class BasicCSVStatsHandler(MontyHandler):
         if "most_likely_object" in dataframe:
             top_columns = [
                 "primary_performance",
-                "stepwise_performance",
+                # "stepwise_performance",
                 "num_steps",
                 "rotation_error",
                 "result",
                 "most_likely_object",
                 "primary_target_object",
-                "stepwise_target_object",
+                # "stepwise_target_object",
                 "highest_evidence",
                 "time",
                 "symmetry_evidence",
