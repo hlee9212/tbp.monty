@@ -12,7 +12,38 @@ import unittest
 
 import pandas as pd
 
-from tbp.monty.frameworks.run_parallel import parse_episode_spec, per_lm_stats
+from tbp.monty.frameworks.run_parallel import (
+    get_overall_stats,
+    parse_episode_spec,
+    per_lm_stats,
+)
+
+
+class OverallStatsTest(unittest.TestCase):
+    def test_accepts_supported_episode_metrics(self):
+        stats = {
+            "episode/correct": [1],
+            "episode/confused": [0],
+            "episode/correct_mlh": [0],
+            "episode/confused_mlh": [0],
+            "episode/no_match": [0],
+            "episode/pose_time_out": [0],
+            "episode/time_out": [0],
+            "episode/used_mlh_after_time_out": [0],
+            "episode/consistent_child_obj": [0],
+            "episode/avg_prediction_error": [0.0],
+            "episode/rotation_error": [0.0],
+            "episode/lm_steps": [1],
+            "episode/monty_steps": [1],
+            "episode/monty_matching_steps": [1],
+            "episode/run_time": [1.0],
+            "episode/goal_states_attempted": [0],
+            "episode/goal_state_success_rate": [0.0],
+        }
+
+        overall_stats = get_overall_stats(stats)
+
+        self.assertEqual(overall_stats["overall/percent_correct"], 100.0)
 
 
 class PerLMStatsTest(unittest.TestCase):
