@@ -21,24 +21,23 @@ from tbp.monty.frameworks.run_parallel import (
 class PerLMStatsTest(unittest.TestCase):
     def test_reconstructs_named_accuracy(self):
         eval_stats = pd.DataFrame(
-            {
-                "lm_id": ["LM_0"] * 3 + ["LM_1"] * 4,
-                "primary_performance": [
-                    "correct",
-                    "correct_mlh",
-                    "no_match",
-                    "confused",
-                    "confused_mlh",
-                    "time_out",
-                    "correct",
-                ],
-            }
+            [
+                ("LM_0", "correct"),
+                ("LM_1", "confused"),
+                ("LM_0", "correct_mlh"),
+                ("LM_1", "confused_mlh"),
+                ("LM_0", "no_match"),
+                ("LM_1", "time_out"),
+                ("LM_0", "confused"),
+                ("LM_1", "correct"),
+            ],
+            columns=["lm_id", "primary_performance"],
         )
 
         self.assertEqual(
             per_lm_stats(eval_stats),
             {
-                "LM_0/overall/percent_correct": 66.66666666666666,
+                "LM_0/overall/percent_correct": 50.0,
                 "LM_1/overall/percent_correct": 25.0,
             },
             "per-LM accuracy should match the expected LM_0 and LM_1 keys and values",
