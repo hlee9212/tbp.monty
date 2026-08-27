@@ -2,7 +2,6 @@
 
 do_train: true
 train_env_interface_args:
-  parent_to_child_mapping: null
   object_names:
   - 021_logo_tbp
   - 022_logo_numenta

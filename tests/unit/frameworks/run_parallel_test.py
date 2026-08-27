@@ -30,7 +30,6 @@ class OverallStatsTest(unittest.TestCase):
             "episode/pose_time_out": [0],
             "episode/time_out": [0],
             "episode/used_mlh_after_time_out": [0],
-            "episode/consistent_child_obj": [0],
             "episode/avg_prediction_error": [0.0],
             "episode/rotation_error": [0.0],
             "episode/lm_steps": [1],
@@ -44,17 +43,17 @@ class OverallStatsTest(unittest.TestCase):
         overall_stats = get_overall_stats(stats)
 
         self.assertEqual(overall_stats["overall/percent_correct"], 100.0)
+        self.assertNotIn("overall/percent_consistent_child_obj", overall_stats)
 
 
 class PerLMStatsTest(unittest.TestCase):
     def test_reconstructs_named_accuracy(self):
         eval_stats = pd.DataFrame(
             {
-                "lm_id": ["LM_0"] * 4 + ["LM_1"] * 4,
+                "lm_id": ["LM_0"] * 3 + ["LM_1"] * 4,
                 "primary_performance": [
                     "correct",
                     "correct_mlh",
-                    "consistent_child_obj",
                     "no_match",
                     "confused",
                     "confused_mlh",
@@ -67,7 +66,7 @@ class PerLMStatsTest(unittest.TestCase):
         self.assertEqual(
             per_lm_stats(eval_stats),
             {
-                "LM_0/overall/percent_correct": 50.0,
+                "LM_0/overall/percent_correct": 66.66666666666666,
                 "LM_1/overall/percent_correct": 25.0,
             },
             "per-LM accuracy should match the expected LM_0 and LM_1 keys and values",

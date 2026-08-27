@@ -129,10 +129,6 @@ We want to determine the ability of a Monty system with a heterarchy of LMs to b
 
 The monolithic baseline uses the same two child SM/LM pairs and third high-level SM/LM pair, and follows the same staged training process: the low-level LMs first learn the 3D objects and logos, and then the high-level LM is trained on the compositional objects. However, there are no connections between LMs. Each LM receives input only from its paired SM, so the high-level LM learns each object as a monolithic model rather than as a composition of detected child objects.
 
-To measure performance, we introduced two new metrics:
-
-* `consistent_child_obj`, which measures when a learning module detects an object within the set of plausible children objects. For example, the consistent child objects for `mug_tbp_horz` would be `mug` and `tbp_logo`. We use this since the lower level LM doesn't have the compositional model and we have no ability, e.g. a semantic sensor, to know which part it was sensing.
-* `mlh_prediction_error`, which measures how closely the prediction of the most likely hypothesis matches the current input.
 
 ### Results
 
