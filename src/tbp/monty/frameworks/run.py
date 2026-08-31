@@ -18,6 +18,8 @@ from omegaconf import DictConfig, OmegaConf
 
 from tbp.monty.hydra import instantiate_experiment, register_resolvers
 
+register_resolvers()
+
 logger = logging.getLogger(__name__)
 
 
