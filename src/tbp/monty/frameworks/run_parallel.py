@@ -41,11 +41,9 @@ from tbp.monty.frameworks.utils.logging_utils import (
     maybe_rename_existing_file,
     overall_accuracy,
 )
-from tbp.monty.hydra import instantiate_experiment, register_resolvers
+from tbp.monty.hydra import instantiate_experiment
 
 __all__ = ["main"]
-
-register_resolvers()
 
 logger = logging.getLogger(__name__)
 
@@ -767,7 +765,6 @@ def main(cfg: DictConfig):
         os.environ["HABITAT_SIM_LOG"] = "quiet"
 
     print_config(cfg)
-    register_resolvers()
 
     if cfg.experiment.config.do_train:
         assert issubclass(
