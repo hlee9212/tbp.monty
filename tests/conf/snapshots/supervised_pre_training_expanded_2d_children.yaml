@@ -21,7 +21,7 @@ experiment:
             _target_: tbp.monty.frameworks.models.motor_policies.NaiveScanPolicy
             use_goal_driven_actions: false
             agent_id: agent_id_0
-            fixed_amount: 5
+            fixed_amount: 1
           _target_: tbp.monty.frameworks.models.motor_policy_selectors.SinglePolicySelector
         _target_: tbp.monty.frameworks.models.motor_system.MotorSystem
       learning_modules:
@@ -200,7 +200,11 @@ experiment:
       - - 0
       - - 1
       - - 2
-      lm_to_lm_matrix: null
+      lm_to_lm_matrix:
+      - []
+      - []
+      - - 0
+        - 1
       lm_to_lm_vote_matrix: null
     environment:
       env_init_args:
@@ -212,7 +216,7 @@ experiment:
           - -0.1
         scene_id: null
         seed: 42
-        data_path: ${path.expanduser:${oc.env:MONTY_DATA}/habitat/objects/compositional_objects}
+        data_path: ${path.expanduser:${oc.env:MONTY_DATA}/compositional_objects_1.3}
         agents:
           agent_args:
             agent_id: agent_id_0
@@ -312,28 +316,41 @@ experiment:
         use_semantic_sensor: false
     train_env_interface_args:
       object_names:
-      - 001_cube
-      - 006_disk
-      - 002_cube_tbp
-      - 004_cube_numenta
-      - 007_disk_tbp
-      - 009_disk_numenta
-      - 011_cylinder
-      - 016_sphere
-      - 023_mug
-      - 012_cylinder_tbp_horz
-      - 014_cylinder_numenta_horz
-      - 017_sphere_tbp
-      - 019_sphere_numenta
-      - 024_mug_tbp_horz
-      - 026_mug_numenta_horz
-      - 013_cylinder_tbp_vert
-      - 015_cylinder_numenta_vert
-      - 025_mug_tbp_vert
-      - 027_mug_numenta_vert
+      - 021_logo_tbp
+      - 022_logo_numenta
+      - 028_square
+      - 029_circle
+      - 030_triangle
+      - 031_star
+      - 032_heart
       object_init_sampler:
+        positions:
+        - - 0.0
+          - 1.5
+          - 0.0
+        - - -0.015
+          - 1.5
+          - 0.0
+        - - -0.03
+          - 1.5
+          - 0.0
+        - - -0.045
+          - 1.5
+          - 0.0
+        - - 0.015
+          - 1.5
+          - 0.0
+        - - 0.03
+          - 1.5
+          - 0.0
+        - - 0.045
+          - 1.5
+          - 0.0
+        rotations:
+        - - 0.0
+          - 0.0
+          - 0.0
         _target_: tbp.monty.frameworks.environments.object_init_samplers.Predefined
-        rotations: ${constants.rotations_all}
       positioning_procedures:
       - _target_: tbp.monty.frameworks.environments.positioning_procedures.GetGoodViewFactory
         agent_id: agent_id_0
@@ -352,24 +369,25 @@ experiment:
       monty_data_logger:
         _target_: tbp.monty.frameworks.loggers.exp_logger.BaseMontyLogger
         handlers: []
-      run_name: supervised_pre_training_objects_with_stickers_monolithic_models
+      run_name: supervised_pre_training_expanded_2d_children
+    skip_on_object_not_visible: true
     show_sensor_output: false
-    max_train_steps: 1000
+    max_train_steps: 250
     max_eval_steps: 500
-    max_total_steps: 6000
-    n_train_epochs: ${constants.rotations_all_count}
-    n_eval_epochs: 3
-    model_name_or_path: ${path.expanduser:${oc.env:MONTY_MODELS}/my_trained_models/supervised_pre_training_objects_with_stickers_2d_children/pretrained/}
+    max_total_steps: 500
+    n_train_epochs: 7
+    n_eval_epochs: 7
+    model_name_or_path: ${path.expanduser:${oc.env:MONTY_MODELS}/my_trained_models/supervised_pre_training_expanded_3d_children/pretrained/}
     match_criterion:
       _target_: tbp.monty.experiment.match_criteria.AnyLMsMatch
-      count: 3
+      count: 1
     recognition_policy:
       _target_: tbp.monty.experiment.recognition_policy.NaiveScan
-      fixed_amount: 5
-      max_total_steps: 6000
+      fixed_amount: 1
+      max_total_steps: 500
     seed: 42
     supervised_lm_ids:
-    - learning_module_2
+    - learning_module_1
   _target_: tbp.monty.frameworks.experiments.pretraining_experiments.MontySupervisedObjectPretrainingExperiment
 episodes: all
 num_parallel: 16
