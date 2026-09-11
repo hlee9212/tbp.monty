@@ -29,8 +29,9 @@ class EvidenceLMTest(BaseGraphTest):
         """Keep YCB and expanded compositional IDs distinct, including together."""
         config_dir = HYDRA_ROOT / "env_interface"
         ycb_ids = list(
-            OmegaConf.load(config_dir / "eval_77obj_predefined.yaml")
-            .eval_env_interface_args.object_names
+            OmegaConf.load(
+                config_dir / "eval_77obj_predefined.yaml"
+            ).eval_env_interface_args.object_names
         )
         compositional_ids = []
         for config_name in (
@@ -38,8 +39,9 @@ class EvidenceLMTest(BaseGraphTest):
             "train_expanded_2d_children_predefined",
         ):
             compositional_ids.extend(
-                OmegaConf.load(config_dir / f"{config_name}.yaml")
-                .train_env_interface_args.object_names
+                OmegaConf.load(
+                    config_dir / f"{config_name}.yaml"
+                ).train_env_interface_args.object_names
             )
         self.assertEqual(len(ycb_ids), 77)
         self.assertEqual(len(compositional_ids), 126)
