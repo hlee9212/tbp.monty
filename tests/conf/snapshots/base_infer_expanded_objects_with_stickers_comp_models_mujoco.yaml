@@ -441,7 +441,7 @@ experiment:
     max_eval_steps: 100
     n_train_epochs: 3
     n_eval_epochs: ${constants.rotations_3_count}
-    model_name_or_path: ${path.expanduser:${oc.env:MONTY_MODELS}/pretrained_models_v7}/supervised_pre_training_expanded_comp_models/pretrained/
+    model_name_or_path: ${path.expanduser:${oc.env:MONTY_MODELS}/pretrained_compositional_objects_v7}/supervised_pre_training_expanded_comp_models/pretrained/
     match_criterion:
       _target_: tbp.monty.experiment.match_criteria.NamedLMsMatch
       ids:
